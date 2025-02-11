@@ -32,7 +32,9 @@ export default function Navbar() {
     return (
         <div className="bg-gray-800 sticky top-0 z-10">
             <nav className="container text-white p-4 flex justify-between items-center relative">
-                <h1 className="text-2xl font-bold">Mufid</h1>
+                <Link to={"/"}>
+                    <h1 className="text-2xl font-bold">Mufid</h1>
+                </Link>
 
                 {/* Mobile Menu Toggle */}
                 <button className="lg:hidden z-50" onClick={() => setMenuOpen(!menuOpen)}>
