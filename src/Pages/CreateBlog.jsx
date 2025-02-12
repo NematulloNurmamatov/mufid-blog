@@ -74,7 +74,7 @@ export default function CreateBlog({ onBlogCreated }) {
     }
 
     return (
-        <div className="container p-5 bg-white shadow rounded">
+        <div className="container p-5 shadow rounded">
             <h1 className="text-2xl font-bold text-center mb-4">Yangi Blog Qo‘shish</h1>
 
             <form className="space-y-4" onSubmit={handleSumbit2}>
@@ -112,13 +112,14 @@ export default function CreateBlog({ onBlogCreated }) {
                 <input
                     type="file"
                     onChange={handleImageChange}
-                    className="w-full"
+                    className="w-full mt-4"
                     required
                 />
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white p-2 rounded"
+                    className={`w-full p-2 rounded ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+                        } text-white transition-all duration-300`}
                     disabled={loading}
                 >
                     {loading ? <Spin /> : "Blogni yaratish"}

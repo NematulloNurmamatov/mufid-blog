@@ -4,7 +4,6 @@ const apiClient = axios.create({
     baseURL: "https://asadbek6035.pythonanywhere.com",
 });
 
-// ✅ Tokenni xavfsiz olish
 apiClient.interceptors.request.use((config) => {
     let token = localStorage.getItem("token");
     let parsedToken = null;
@@ -27,7 +26,7 @@ apiClient.interceptors.request.use((config) => {
 
 
 
-// ✅ Xatolikni ushlash va token muddati tugasa, login sahifasiga yo‘naltirish
+//  Xatolikni ushlash va token muddati tugasa, login sahifasiga yo‘naltirish
 apiClient.interceptors.response.use(
     (response) => response,
     (error) => {

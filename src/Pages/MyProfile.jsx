@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { message, Input, Button, Spin, DatePicker, Select } from "antd";
-import apiClient from "../API/ApiClient"; 
+import apiClient from "../API/ApiClient";
 import { useNavigate } from "react-router-dom";
-import moment from "moment"; 
+import moment from "moment";
 
 export default function MyProfile() {
     const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ export default function MyProfile() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            navigate("/login"); 
+            navigate("/login");
             return;
         }
 
@@ -199,8 +199,14 @@ export default function MyProfile() {
                             </Select>
                         </div>
 
-                        <Button onClick={handleSaveProfile} type="primary" className="mr-2">
-                            Save Changes
+                        <Button
+                            onClick={handleSaveProfile}
+                            type="primary"
+                            className="mr-2"
+                            disabled={loading} // Spinner ishlayotgan paytda tugmani o'chirish
+                            style={{ backgroundColor: loading ? "gray" : undefined }} // Spinner paytida kulrang rang
+                        >
+                            {loading ? <Spin size="small" /> : "Save Changes"}
                         </Button>
                         {/* <Button onClick={() => setIsEditing(false)} type="default">
                             Ortga qaytish

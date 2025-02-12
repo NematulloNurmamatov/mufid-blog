@@ -8,11 +8,10 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Fetch blog list
     useEffect(() => {
-        const token = localStorage.getItem("token"); // Check for token
+        const token = localStorage.getItem("token"); 
         if (!token) {
-            navigate("/login"); // If no token, redirect to login
+            navigate("/login");
             return;
         }
 
@@ -20,11 +19,11 @@ export default function Home() {
             try {
                 const response = await apiClient.get("/blog/list/", {
                     headers: {
-                        "Authorization": `Bearer ${JSON.parse(token).access}`, // Pass token in headers
+                        "Authorization": `Bearer ${JSON.parse(token).access}`,
                     },
                 });
                 if (response?.data) {
-                    setBlogs(response.data); // Set blog list
+                    setBlogs(response.data); 
                 }
             } catch (error) {
                 console.error("Error fetching blogs:", error);
@@ -37,36 +36,14 @@ export default function Home() {
         fetchBlogs();
     }, [navigate]);
 
-    // Handle blog click for viewing details
     const handleBlogClick = (blogId) => {
         navigate(`/blog/${blogId}`);
     };
 
-    // Handle creating a new blog
     const handleCreateBlog = () => {
         navigate("/create-blog");
     };
 
-    // Handle deleting a blog
-    const handleDeleteBlog = async (blogId) => {
-        const token = localStorage.getItem("token");
-        try {
-            const response = await apiClient.delete(`/blog/category/delete/${blogId}`, {
-                headers: {
-                    "Authorization": `Bearer ${JSON.parse(token).access}`,
-                },
-            });
-
-            if (response?.data) {
-                message.success("Blog successfully deleted!");
-                // Update state directly after deletion
-                setBlogs(blogs.filter((blog) => blog.id !== blogId)); // Remove deleted blog
-            }
-        } catch (error) {
-            console.error("Error deleting blog:", error);
-            message.error("An error occurred while deleting the blog.", 3);
-        }
-    };
 
     if (loading) {
         return (
@@ -107,18 +84,6 @@ export default function Home() {
                                 <p className="dark:text-white">{blog?.description}</p>
                                 <p className="text-gray-500 dark:text-gray-300">{blog?.date_created}</p>
 
-                                {/* Delete button */}
-                                <Button 
-                                    type="danger" 
-                                    size="small" 
-                                    onClick={(e) => {
-                                        e.stopPropagation(); // Prevent blog click event from firing
-                                        handleDeleteBlog(blog.id);
-                                    }}
-                                    className="mt-2 !bg-red-500 !text-white"
-                                >
-                                    O'chirish
-                                </Button>
                             </div>
                         </div>
                     ))

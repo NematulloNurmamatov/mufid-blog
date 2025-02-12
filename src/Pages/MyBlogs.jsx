@@ -57,7 +57,7 @@ export default function MyBlogs() {
                     blogs.map((blog) => (
                         <div
                             key={blog.id}
-                            className="flex shadow-lg gap-4  cursor-pointer hover:bg-gray-200 duration-150 border border-zinc-400 p-2 rounded-md"
+                            className="flex shadow-lg gap-4  cursor-pointer hover:bg-gray-200 duration-150 border border-zinc-400 p-2 rounded-md dark:hover:bg-gray-800"
                         >
                             {blog?.image && (
                                 <img className="w-[200px] h-[130px]" src={blog.image} alt={blog.title} />
